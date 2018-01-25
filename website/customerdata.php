@@ -75,10 +75,14 @@ include 'functions.php';
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">HEADER</li>
+                <li class="header"></li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="active"><a href="customerdata.php"><i class="fa fa-link"></i> <span>mijn gegevens</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+                <?php
+                if ($currentCustomer->getAccounttype() == 'medewerker'){
+                    echo "<li><a href='addcustomer.php'><i class='fa fa-link'></i> <span>Voeg klant toe</span></a></li>";
+                }
+                ?>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
                         <span class="pull-right-container">
@@ -111,7 +115,6 @@ include 'functions.php';
 
         <?php
         if (!empty($_POST)){
-            $currentCustomer = new Customer();
             $currentCustomer->setFirstname($_POST['firstname']);
             $currentCustomer->setMiddlename($_POST['middlename']);
             $currentCustomer->setLastname($_POST['lastname']);
@@ -139,7 +142,7 @@ include 'functions.php';
                 <tr><td>Geboorte datum</td><td><input title="birthday" form="customerform" id="birthday" name="birthday" type="text" maxlength="255" value="<?= $currentCustomer->getBirthday() ?>"></td></tr>
                 <tr><td>Telefoon nummer</td><td><input title="phonenumber" form="customerform" id="phonenumber" name="phonenumber" type="number" maxlength="10" value="<?= $currentCustomer->getPhonenumber() ?>"></td></tr>
                 <tr><td>Email adres</td><td><input title="email" form="customerform" id="email" name="email" type="text" maxlength="255" value="<?= $currentCustomer->getEmail() ?>"></td></tr>
-                <tr><td>password</td><td><input title="password" form="customerform" id="password" name="password" type="text" maxlength="255" value=""></td></tr>
+                <tr><td>password</td><td><input title="password" form="customerform" id="password" name="password" type="password" maxlength="255" value=""></td></tr>
                 <tr><td>Straatnaam</td><td><input title="street" form="customerform" id="street" name="street" type="text" maxlength="255" value="<?= $currentCustomer->getStreet() ?>"></td></tr>
                 <tr><td>huisnummer</td><td><input title="housenumber" form="customerform" id="housenumber" name="housenumber" type="text" maxlength="255" value="<?= $currentCustomer->getHousenumber() ?>"></td></tr>
                 <tr><td>toevoeging</td><td><input title="houseaffix" form="customerform" id="houseaffix" name="houseaffix" type="text" maxlength="255" value="<?= $currentCustomer->getHouseaffix() ?>"></td></tr>

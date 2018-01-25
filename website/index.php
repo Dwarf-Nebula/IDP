@@ -75,10 +75,15 @@ include 'functions.php';
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
+        <li class="header"></li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="customerdata.php"><i class="fa fa-link"></i> <span>mijn gegevens</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <li><a href="customerdata.php"><i class="fa fa-link"></i> <span>mijn gegevens</span></a></li>
+          <?php
+          if ($currentCustomer->getAccounttype() == 'medewerker'){
+            echo "<li><a href='addcustomer.php'><i class='fa fa-link'></i> <span>Voeg klant toe</span></a></li>";
+          }
+          ?>
+
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">

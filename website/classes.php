@@ -130,20 +130,20 @@ Class Customer
     {
         $db->query('INSERT INTO `klanten` 
                     (`voornaam`, `tussenvoegsel`, `achternaam`, `geboortedatum`, `telefoonnummer`, `emailadres`, `actief`, `wachtwoord`, `accounttype`, `straat`, `huisnummer`, `huisnummertoevoeging`, `postcode`, `stad`) 
-                    VALUES ('.$this->getFirstname().',
-                            '.$this->getMiddlename().',
-                            '.$this->getLastname().',
-                            '.$this->getBirthday().',
+                    VALUES ("'.$this->getFirstname().'",
+                            "'.$this->getMiddlename().'",
+                            "'.$this->getLastname().'",
+                            "'.$this->getBirthday().'",
                             '.$this->getPhonenumber().',
-                            '.$this->getEmail().',
+                            "'.$this->getEmail().'",
                             '.$this->getActive().',
-                            '.$this->getPassword().',
-                            '.$this->getAccounttype().',
-                            '.$this->getStreet().',
+                            "'.$this->getPassword().'",
+                            "'.$this->getAccounttype().'",
+                            "'.$this->getStreet().'",
                             '.$this->getHousenumber().',
-                            '.$this->getHouseaffix().',
-                            '.$this->getZipcode().',
-                            '.$this->getCity().'
+                            "'.$this->getHouseaffix().'",
+                            "'.$this->getZipcode().'",
+                            "'.$this->getCity().'"
                             );
 
         ');
