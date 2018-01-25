@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jasper
- * Date: 25-1-2018
- * Time: 10:51
- */
+
 include 'db.php';
 $db = new MySQL();
 $db->connect('127.0.0.1','root','', 'benno', '3306');
@@ -22,6 +17,13 @@ Class Customer
      * @param int @phonenumber
      * @param string @email
      * @param string @active
+     * @param string @password;
+     * @param string @accounttype;
+     * @param string @street;
+     * @param int  @housenumber;
+     * @param string  @houseaffix;
+     * @param string  @zipcode;
+     * @param string  @city;
      */
 
     private $id;
@@ -32,22 +34,35 @@ Class Customer
     private $phonenumber;
     private $email;
     private $active;
-//    private $username; tbi not yet in db
-//    private $password; tbi not yet in db
+    private $password;
+    private $accounttype;
+    private $street;
+    private $housenumber;
+    private $houseaffix = null;
+    private $zipcode;
+    private $city;
 
-    /**
-     * Customer constructor.
-     * @param $id
-     * @param $firstname
-     * @param null $middlename
-     * @param $lastname
-     * @param $birthday
-     * @param $phonenumber
-     * @param $email
-     * @param $active
-     */
 
-    public function __construct($id=null, $firstname=null, $middlename=null, $lastname=null, $birthday=null, $phonenumber=null, $email=null, $active=null)
+//    /**
+//     * Customer constructor.
+//     * @param $id
+//     * @param $firstname
+//     * @param null $middlename
+//     * @param $lastname
+//     * @param $birthday
+//     * @param $phonenumber
+//     * @param $email
+//     * @param $active
+//     * @param $password
+//     * @param $accounttype
+//     * @param $street
+//     * @param $housenumber
+//     * @param $houseaffix
+//     * @param $zipcode
+//     * @param $city
+//     */
+//
+    public function __construct($id = null, $firstname = null, $middlename = null, $lastname = null, $birthday = null, $phonenumber = null, $email = null, $active = null, $password = null, $accounttype = null, $street = null, $housenumber = null, $houseaffix = null, $zipcode = null, $city = null)
     {
         $this->id = $id;
         $this->firstname = $firstname;
@@ -57,6 +72,13 @@ Class Customer
         $this->phonenumber = $phonenumber;
         $this->email = $email;
         $this->active = $active;
+        $this->password = $password;
+        $this->accounttype = $accounttype;
+        $this->street = $street;
+        $this->housenumber = $housenumber;
+        $this->houseaffix = $houseaffix;
+        $this->zipcode = $zipcode;
+        $this->city = $city;
     }
 
     /**
@@ -66,17 +88,29 @@ Class Customer
      */
     public static function getCustomerByCustomerId($db, $id)
     {
-        $test = new Customer();
-        $customer = $db->query('SELECT * FROM `klanttabel` WHERE klantnummer = '.$id)->fetch_assoc();
-        $test->setId($customer['klantnummer']);
-        $test->setFirstname($customer['voornaam']);
-        $test->setMiddlename($customer['tussenvoegsel']);
-        $test->setLastname($customer['achernaam']);
-        $test->setBirthday($customer['geboortedatum']);
-        $test->setPhonenumber($customer['telefoonnummer']);
-        $test->setEmail($customer['emailadres']);
-        $test->setActive($customer['actief']);
-        return $test;
+        $tempcustomer = new Customer();
+        $customer = $db->query('SELECT * FROM `klanten` WHERE klantnummer = '.$id)->fetch_assoc();
+        $tempcustomer->setId($customer['klantnummer']);
+        $tempcustomer->setFirstname($customer['voornaam']);
+        $tempcustomer->setMiddlename($customer['tussenvoegsel']);
+        $tempcustomer->setLastname($customer['achternaam']);
+        $tempcustomer->setBirthday($customer['geboortedatum']);
+        $tempcustomer->setPhonenumber($customer['telefoonnummer']);
+        $tempcustomer->setEmail($customer['emailadres']);
+        $tempcustomer->setActive($customer['actief']);
+        $tempcustomer->setPassword($customer['wachtwoord']);
+        $tempcustomer->setAccounttype($customer['accounttype']);
+        $tempcustomer->setStreet($customer['straat']);
+        $tempcustomer->setHousenumber($customer['huisnummer']);
+        $tempcustomer->setHouseaffix($customer['huisnummertoevoeging']);
+        $tempcustomer->setZipcode($customer['postcode']);
+        $tempcustomer->setCity($customer['stad']);
+
+        return $tempcustomer;
+    }
+    public static function verifyLogin($db,$email,$password)
+    {
+
     }
 
     public static function activateCustomerByCustomerId($db, $id)
@@ -94,18 +128,161 @@ Class Customer
      */
     public function insertCustomerInDB($db)
     {
-        $db->query('INSERT INTO `klanttabel`
-                    (`voornaam`, `tussenvoegsel`, `achernaam`, `geboortedatum`, `telefoonnummer`, `emailadres`, `actief`) 
-                    VALUES (
-                            '.$this->getFirstname().',
+        $db->query('INSERT INTO `klanten` 
+                    (`voornaam`, `tussenvoegsel`, `achternaam`, `geboortedatum`, `telefoonnummer`, `emailadres`, `actief`, `wachtwoord`, `accounttype`, `straat`, `huisnummer`, `huisnummertoevoeging`, `postcode`, `stad`) 
+                    VALUES ('.$this->getFirstname().',
                             '.$this->getMiddlename().',
                             '.$this->getLastname().',
                             '.$this->getBirthday().',
                             '.$this->getPhonenumber().',
                             '.$this->getEmail().',
-                            '.$this->getActive().'
+                            '.$this->getActive().',
+                            '.$this->getPassword().',
+                            '.$this->getAccounttype().',
+                            '.$this->getStreet().',
+                            '.$this->getHousenumber().',
+                            '.$this->getHouseaffix().',
+                            '.$this->getZipcode().',
+                            '.$this->getCity().'
+                            );
+
         ');
     }
+
+    public function updateCustomer($db)
+    {
+        $db->query('UPDATE `klanten` SET 
+                                        `voornaam`= "'.$this->getFirstname().'",
+                                        `tussenvoegsel`= "'.$this->getMiddlename().'",
+                                        `achternaam`= "'.$this->getLastname().'",
+                                        `geboortedatum`= "'.$this->getBirthday().'",
+                                        `telefoonnummer`='.$this->getPhonenumber().',
+                                        `emailadres`="'.$this->getEmail().'",
+                                        `actief`='.$this->getActive().',
+                                        `wachtwoord`= "'.$this->getPassword().'",
+                                        `accounttype`= "'.$this->getAccounttype().'",
+                                        `straat`= "'.$this->getStreet().'",
+                                        `huisnummer`='.$this->getHousenumber().',
+                                        `huisnummertoevoeging`="'.$this->getHouseaffix().'",
+                                        `postcode`="'.$this->getZipcode().'",
+                                        `stad`="'.$this->getCity().'"
+                                        WHERE
+                                        `klantnummer` = '.$this->getId().'
+        ');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccounttype()
+    {
+        return $this->accounttype;
+    }
+
+    /**
+     * @param mixed $accounttype
+     */
+    public function setAccounttype($accounttype)
+    {
+        $this->accounttype = $accounttype;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    /**
+     * @param mixed $street
+     */
+    public function setStreet($street)
+    {
+        $this->street = $street;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHousenumber()
+    {
+        return $this->housenumber;
+    }
+
+    /**
+     * @param mixed $housenumber
+     */
+    public function setHousenumber($housenumber)
+    {
+        $this->housenumber = $housenumber;
+    }
+
+    /**
+     * @return null
+     */
+    public function getHouseaffix()
+    {
+        return $this->houseaffix;
+    }
+
+    /**
+     * @param null $houseaffix
+     */
+    public function setHouseaffix($houseaffix)
+    {
+        $this->houseaffix = $houseaffix;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * @param mixed $zipcode
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
 
     /**
      * @return mixed

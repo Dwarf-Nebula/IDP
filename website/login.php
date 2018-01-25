@@ -1,14 +1,28 @@
 <?php
 //// login page for sheit using session n stuff
-//include 'classes.php';
-//
-//$obj = new Object();
-//
-//$_SESSION['obj'] = serialize($obj);
-//
-////after usage
-//
-//$obj = unserialize($_SESSION['obj']);
+include 'functions.php';
+
+$loginstate = null;
+if(isset($_POST['email']) && isset($_POST['password'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $results = $db->query('SELECT `klantnummer`,`wachtwoord` FROM `klanten` WHERE `emailadres` = "'.$email.'"');
+    $numrows = $results->rows();
+    if ($numrows == 1) {
+        $emailresult = $results->fetch_assoc();
+        if (hash_equals($emailresult['wachtwoord'],crypt($password,$emailresult['wachtwoord']))){
+            $customer = Customer::getCustomerByCustomerId($db, $emailresult['klantnummer']);
+            session_unset();
+            $_SESSION['customer'] = serialize($customer);
+            $loginstate = 'succes';
+            header("Location: index.php");
+            exit();
+        }
+    }else{
+        $loginstate = 'failed';
+    }
+
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,19 +56,19 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="index2.html"><b>Benno's</b> Gym</a>
+        <a href="login.php"><b>Benno's</b> Gym</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">log in om je sessie te starten</p>
 
-        <form action="index2.html" method="post">
+        <form action="login.php" method="post">
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email">
+                <input name="email" type="email" class="form-control" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Wachtwoord">
+                <input name="password" type="password" class="form-control" placeholder="Wachtwoord">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">

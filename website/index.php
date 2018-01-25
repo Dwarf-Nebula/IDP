@@ -40,7 +40,7 @@ include 'functions.php';
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>B</b>SS</span>
       <!-- logo for regular state and mobile devices -->
@@ -67,7 +67,7 @@ include 'functions.php';
           <img src="dist/img/benno/Benno-logo-001.png" class="img-circle"/>
         </div>
         <div class="pull-left info">
-          <p><?= $customer->getFirstname(); ?> <?=$customer->getMiddlename(); ?> <?=$customer->getLastname()?></p>
+          <p><?= $currentCustomer->getFirstname(); ?> <?=$currentCustomer->getMiddlename(); ?> <?=$currentCustomer->getLastname()?></p>
           <!-- Status -->
 
         </div>
@@ -77,7 +77,7 @@ include 'functions.php';
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+        <li class="active"><a href="customerdata.php"><i class="fa fa-link"></i> <span>mijn gegevens</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
