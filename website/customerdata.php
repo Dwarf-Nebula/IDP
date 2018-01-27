@@ -141,7 +141,7 @@ include 'functions.php';
                 <tr><td>Achternaam</td><td><input title="lastname" form="customerform" id="lastname" name="lastname" type="text" maxlength="255" value="<?= $currentCustomer->getLastname() ?>"></td></tr>
                 <tr><td>Geboorte datum</td><td><input title="birthday" form="customerform" id="birthday" name="birthday" type="text" maxlength="255" value="<?= $currentCustomer->getBirthday() ?>"></td></tr>
                 <tr><td>Telefoon nummer</td><td><input title="phonenumber" form="customerform" id="phonenumber" name="phonenumber" type="number" maxlength="10" value="<?= $currentCustomer->getPhonenumber() ?>"></td></tr>
-                <tr><td>Email adres</td><td><input title="email" form="customerform" id="email" name="email" type="text" maxlength="255" value="<?= $currentCustomer->getEmail() ?>"></td></tr>
+                <tr><td>Email adres</td><td><input title="email" form="customerform" id="email" name="email" type="email" maxlength="255" value="<?= $currentCustomer->getEmail() ?>"></td></tr>
                 <tr><td>password</td><td><input title="password" form="customerform" id="password" name="password" type="password" maxlength="255" value=""></td></tr>
                 <tr><td>Straatnaam</td><td><input title="street" form="customerform" id="street" name="street" type="text" maxlength="255" value="<?= $currentCustomer->getStreet() ?>"></td></tr>
                 <tr><td>huisnummer</td><td><input title="housenumber" form="customerform" id="housenumber" name="housenumber" type="text" maxlength="255" value="<?= $currentCustomer->getHousenumber() ?>"></td></tr>

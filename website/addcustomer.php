@@ -146,7 +146,7 @@ if($currentCustomer->getAccounttype() != 'medewerker'){
                     <tr><td>Achternaam</td><td><input title="lastname" form="customerform" id="lastname" name="lastname" type="text" maxlength="255" placeholder="<?= $currentCustomer->getLastname() ?>"></td></tr>
                     <tr><td>Geboorte datum</td><td><input title="birthday" form="customerform" id="birthday" name="birthday" type="text" maxlength="255" placeholder="<?= $currentCustomer->getBirthday() ?>"></td></tr>
                     <tr><td>Telefoon nummer</td><td><input title="phonenumber" form="customerform" id="phonenumber" name="phonenumber" type="number" maxlength="10" placeholder="<?= $currentCustomer->getPhonenumber() ?>"></td></tr>
-                    <tr><td>Email adres</td><td><input title="email" form="customerform" id="email" name="email" type="text" maxlength="255" placeholder="<?= $currentCustomer->getEmail() ?>"></td></tr>
+                    <tr><td>Email adres</td><td><input title="email" form="customerform" id="email" name="email" type="email" maxlength="255" placeholder="<?= $currentCustomer->getEmail() ?>"></td></tr>
                     <tr><td>account type</td><td><input title="accounttype" form="customerform" id="accounttype" name="accounttype" type="text" maxlength="255" placeholder="<?= $currentCustomer->getAccounttype() ?>"></td></tr>
                     <tr><td>password</td><td><input title="password" form="customerform" id="password" name="password" type="password" maxlength="255" placeholder=""></td></tr>
                     <tr><td>Straatnaam</td><td><input title="street" form="customerform" id="street" name="street" type="text" maxlength="255" placeholder="<?= $currentCustomer->getStreet() ?>"></td></tr>
