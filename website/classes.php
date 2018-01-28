@@ -1,4 +1,10 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'plugins/phpmailer/Exception.php';
+require 'plugins/phpmailer/PHPMailer.php';
+require 'plugins/phpmailer/SMTP.php';
 
 include 'db.php';
 $db = new MySQL();
@@ -42,26 +48,6 @@ Class Customer
     private $zipcode;
     private $city;
 
-
-//    /**
-//     * Customer constructor.
-//     * @param $id
-//     * @param $firstname
-//     * @param null $middlename
-//     * @param $lastname
-//     * @param $birthday
-//     * @param $phonenumber
-//     * @param $email
-//     * @param $active
-//     * @param $password
-//     * @param $accounttype
-//     * @param $street
-//     * @param $housenumber
-//     * @param $houseaffix
-//     * @param $zipcode
-//     * @param $city
-//     */
-//
     public function __construct($id = null, $firstname = null, $middlename = null, $lastname = null, $birthday = null, $phonenumber = null, $email = null, $active = null, $password = null, $accounttype = null, $street = null, $housenumber = null, $houseaffix = null, $zipcode = null, $city = null)
     {
         $this->id = $id;
@@ -107,10 +93,6 @@ Class Customer
         $tempcustomer->setCity($customer['stad']);
 
         return $tempcustomer;
-    }
-    public static function verifyLogin($db,$email,$password)
-    {
-
     }
 
     public static function activateCustomerByCustomerId($db, $id)
@@ -171,6 +153,52 @@ Class Customer
         ');
     }
 
+    /**
+     * @return boolean
+     */
+    public function sendAdviceEmailRequest(){
+        try{
+        $mail = new PHPMailer(true);
+        //Server settings
+        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'BeterDanHUbl@gmail.com';                 // SMTP username
+        $mail->Password = 'degeitisgemolken';                           // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to
+            $mail->smtpConnect(
+                array(
+                    "ssl" => array(
+                        "verify_peer" => false,
+                        "verify_peer_name" => false,
+                        "allow_self_signed" => true
+                    )
+                )
+            );
+        //Recipients
+        $customerfullname = $this->getFirstname() .' '.$this->getMiddlename() .' '.$this->getLastname();
+        $mail->setFrom($this->getEmail(), $customerfullname );
+        $mail->addAddress('BeterDanHUbl@gmail.com', "Benno's sportschool");     // Add a recipient
+        $mail->addReplyTo($this->getEmail(), $customerfullname);
+
+
+        //Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'Sport advies aanvraag';
+        $mail->Body    = 'De klant '.$customerfullname. ' heeft sport advies aangevraagd.<br> De sport activiteiten kan je met <a href="benno.using.ovh/stats.php?id='.$this->getId().'">deze link</a> nakijken. <br> Gelieve zo snel mogelijk naar '.$this->getEmail().' . ';
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        $mail->send();
+        return 'Message has been sent';
+
+
+
+        }catch (Exception $e){
+            return 'Mail kan niet worden verzonden. De mailer gaf de volgende error: '. $mail->ErrorInfo;
+        }
+    }
     /**
      * @return mixed
      */

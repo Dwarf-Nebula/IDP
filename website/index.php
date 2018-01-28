@@ -1,5 +1,7 @@
 <?php
 include 'functions.php';
+$currentCustomer->sendAdviceEmailRequest();
+
 ?>
 <!DOCTYPE html>
 <html>
