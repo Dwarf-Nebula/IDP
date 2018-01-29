@@ -82,23 +82,15 @@ if($currentCustomer->getAccounttype() != 'medewerker'){
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header"></li>
                 <!-- Optionally, you can add icons to the links -->
-                <li ><a href="customerdata.php"><i class="fa fa-link"></i> <span>mijn gegevens</span></a></li>
+                <li><a href="customerdata.php"><i class="fa fa-link"></i> <span>mijn gegevens</span></a></li>
+                <li><a href="stats.php"><i class="fa fa-link"></i> <span>Bekijk uw prestaties</span></a></li>
                 <?php
                 if ($currentCustomer->getAccounttype() == 'medewerker'){
-                    echo "<li class='active'><a href='addcustomer.php'><i class='fa fa-link'></i> <span>Voeg klant toe</span></a></li>";
+                    echo "<li><a href='addcustomer.php'><i class='fa fa-link'></i> <span>Voeg klant toe</span></a></li>";
+                    echo "<li><a href='viewlocations.php'><i class='fa fa-link'></i> <span>bekijk filialen</span></a></li>";
                 }
                 ?>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
-                    </ul>
-                </li>
+
             </ul>
             <!-- /.sidebar-menu -->
         </section>

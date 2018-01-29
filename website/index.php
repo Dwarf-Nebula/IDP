@@ -1,7 +1,5 @@
 <?php
 include 'functions.php';
-$currentCustomer->getCaloriesBurned($db,'week')
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -80,23 +78,14 @@ $currentCustomer->getCaloriesBurned($db,'week')
         <li class="header"></li>
         <!-- Optionally, you can add icons to the links -->
         <li><a href="customerdata.php"><i class="fa fa-link"></i> <span>mijn gegevens</span></a></li>
+        <li><a href="stats.php"><i class="fa fa-link"></i> <span>Bekijk uw prestaties</span></a></li>
           <?php
           if ($currentCustomer->getAccounttype() == 'medewerker'){
             echo "<li><a href='addcustomer.php'><i class='fa fa-link'></i> <span>Voeg klant toe</span></a></li>";
+            echo "<li><a href='viewlocations.php'><i class='fa fa-link'></i> <span>bekijk filialen</span></a></li>";
           }
           ?>
 
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
-        </li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -116,9 +105,18 @@ $currentCustomer->getCaloriesBurned($db,'week')
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="chart-container">
+                    <canvas id="gymgoing"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="chart-container" >
+                    <canvas id="equipmentuse"></canvas>
+                </div>
+            </div>
+        </div>
 
     </section>
     <!-- /.content -->
@@ -147,6 +145,118 @@ $currentCustomer->getCaloriesBurned($db,'week')
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+<!-- chars -->
+<script src="bower_components/chart.js/Chart.bundle.min.js"></script>
 
+<script>
+    var gymchart = $("#gymgoing");
+    var equipchart = $('#equipmentuse');
+    var url = 'ajax.php';
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {actionName: 'allchart', id : '<?= $currentCustomer->getId() ?>'},
+        success: function(result){
+            var chartarray = JSON.parse(result);
+            console.log(chartarray);
+            buildcharts(chartarray)
+        },
+        dataType: 'json'
+    });
+
+    function buildcharts(chartarray){
+
+        var days = chartarray['dates'];
+        var equipment = chartarray['devicetypes'];
+        var datadays = chartarray['data']['visits'];
+        var datacal = chartarray['data']['calories'];
+        var tempdataequip = chartarray['data']['devices'];
+        var dataequip = $.map(tempdataequip, function(value, index) {
+            return [value];
+        });
+
+
+        var gymchartconfig = {
+            type: 'bar',
+            data:{
+                labels: days,
+                datasets:[{
+
+                    label: "bezoek",
+                    backgroundColor: "#0000FF",
+                    borderColor: "#0000FF",
+                    data:
+                        datadays
+
+
+                },{
+                    label: "calorieën per honderd",
+                    backgroundColor: "transparent",
+                    borderColor: "#FF0000",
+                    data:
+                    datacal,
+                    type: 'line'
+                }
+
+                ]},
+            options: {
+                responsive: true,
+                title:{
+                    display:true,
+                    text:'Calorieën en bezoeken per week'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+//                            display: true,
+                            labelString: 'Dagen'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Aantal'
+                        }, ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+
+
+        };
+        var equipchartconfig = {
+
+                type: 'pie',
+                data: {
+                    labels: equipment,
+                    datasets: [{
+                        data: dataequip,
+                        backgroundColor: [
+                            "#FF6384",
+                            "#63FF84"
+                        ]
+
+                    }]
+                }
+            };
+
+        window.myLine = new Chart(equipchart, equipchartconfig);
+        window.myLine = new Chart(gymchart, gymchartconfig);
+    }
+
+
+
+</script>
 </body>
 </html>
