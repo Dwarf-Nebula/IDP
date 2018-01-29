@@ -105,6 +105,42 @@ Class Customer
         $db->query('UPDATE `klanttabel` SET `actief`=FALSE WHERE `klantnummer`='.$id);
     }
 
+    public function getCaloriesBurned($db, $time){
+        $now = date('Y-m-d H:i:s');
+        switch($time){
+            case 'week':
+                $begintime = date('Y-m-d H:i:s',strtotime('-1 week'));
+                $result = $db->query("SELECT * FROM `sportactiviteiten` AS sa
+                                      LEFT JOIN apparaten AS app ON sa.apparaatid = app.apparaatid
+                                      LEFT JOIN apparaattypes AS appt ON app.apparaattypeid = appt.apparaattypeid
+                                      WHERE sa.eindtijd IS NOT NULL AND sa.klantnummer = 1 AND sa.begintijd BETWEEN '".$begintime."' AND  '".$now."'")->fetch_all();
+                break;
+            case 'month':
+                $begintime = date('Y-m-d H:i:s',strtotime('-1 month'));
+                $result = $db->query("SELECT * FROM `sportactiviteiten` AS sa
+                                      LEFT JOIN apparaten AS app ON sa.apparaatid = app.apparaatid
+                                      LEFT JOIN apparaattypes AS appt ON app.apparaattypeid = appt.apparaattypeid
+                                      WHERE sa.eindtijd IS NOT NULL AND sa.klantnummer = 1 AND sa.begintijd BETWEEN '".$begintime."' AND  '".$now."'")->fetch_all();
+                break;
+            case 'all':
+                $result = $db->query("SELECT * FROM `sportactiviteiten` AS sa
+                                      LEFT JOIN apparaten AS app ON sa.apparaatid = app.apparaatid
+                                      LEFT JOIN apparaattypes AS appt ON app.apparaattypeid = appt.apparaattypeid
+                                      WHERE sa.eindtijd IS NOT NULL AND sa.klantnummer = ".$this->getId())->fetch_All();
+
+                break;
+            default:
+                return 'Invalid time supplied';
+                break;
+
+        }
+        if (!empty($result)){
+            foreach ($result as $row){
+                var_dump($row);
+            }
+        }
+    }
+
     /**
      * @param mixed $db;
      */

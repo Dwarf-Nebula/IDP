@@ -1,6 +1,6 @@
 <?php
 include 'functions.php';
-$currentCustomer->sendAdviceEmailRequest();
+$currentCustomer->getCaloriesBurned($db,'week')
 
 ?>
 <!DOCTYPE html>

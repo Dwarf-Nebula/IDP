@@ -4,33 +4,33 @@ $db = new MySQL();
 $db->connect('127.0.0.1','root','', 'benno', '3306');
 
 if (!empty($_POST)){ // check if post is set and not empty
-    if (!empty($_POST('action'))){ // check if action is set and not empty
-        $action = $_POST('action');// typing $_POST['action'] is annoying
+    if (!empty($_POST['action'])){ // check if action is set and not empty
+        $action = $_POST['action'];// typing $_POST['action'] is annoying
         switch ($action){
             case 'checkin':
-                if (!empty($_POST('customerid')) && !empty($_POST('locationid'))){
-                    echo checkincustomer($db, $_POST('customerid'), $_POST('locationid'));
+                if (!empty($_POST['customerid']) && !empty($_POST['locationid'])){
+                    echo checkincustomer($db, $_POST['customerid'], $_POST['locationid']);
                 }else{
                     echo 'missing data';
                 }
                 break;
             case 'checkout':
-                if (!empty($_POST('customerid')) && !empty($_POST('locationid'))){
-                    echo checkoutcustomer($db, $_POST('customerid'), $_POST('locationid'));
+                if (!empty($_POST['customerid']) && !empty($_POST['locationid'])){
+                    echo checkoutcustomer($db, $_POST['customerid'], $_POST['locationid']);
                 }else{
                     echo 'missing data';
                 }
                 break;
             case 'activitystart':
-                if (!empty($_POST('customerid')) && !empty($_POST('equipmentid'))){
-                    echo activitystart($db, $_POST('customerid'), $_POST('equipmentid'));
+                if (!empty($_POST['customerid']) && !empty($_POST['equipmentid'])){
+                    echo activitystart($db, $_POST['customerid'], $_POST['equipmentid']);
                 }else{
                     echo 'missing data';
                 }
                 break;
             case 'activitystop':
-                if (!empty($_POST('customerid')) && !empty($_POST('equipmentid'))){
-                    echo activitystop($db, $_POST('customerid'), $_POST('equipmentid'));
+                if (!empty($_POST['customerid']) && !empty($_POST['equipmentid'])){
+                    echo activitystop($db, $_POST['customerid'], $_POST['equipmentid']);
                 }else{
                     echo 'missing data';
                 }
