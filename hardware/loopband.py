@@ -32,6 +32,6 @@ try:
         
 except KeyboardInterrupt:
     print("bye bye")
-    clean()
+    clean(ring_big)
     GPIO.cleanup()
     sys.exit()
