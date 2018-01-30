@@ -33,7 +33,7 @@ try:
         while True:
             hoger_state = GPIO.input(29)
             time.sleep(0.01)
-            print(hoger_state)
+            #print(hoger_state)
             if (hoger_state == True and snelheid < 100):
                 time.sleep(0.1)
                 print("omhoog")
@@ -43,7 +43,7 @@ try:
             
             lager_state = GPIO.input(31)
             time.sleep(0.01)
-            print(lager_state)
+            #print(lager_state)
             if (lager_state == True and snelheid > 0):
                 time.sleep(0.1)
                 print("omlaag")
@@ -53,7 +53,7 @@ try:
             
             card_state = GPIO.input(37)
             time.sleep(0.01)
-            print(card_state)
+            #print(card_state)
             if (card_state == True):
                 time.sleep(0.1)
                 print("card")
