@@ -32,6 +32,7 @@ try:
         #time.sleep(5)
         while True:
             hoger_state = GPIO.input(29)
+            time.sleep(0.01)
             print(hoger_state)
             if (hoger_state == True):
                 time.sleep(0.1)
@@ -39,6 +40,7 @@ try:
                 snelheid += 1
                 motor.ChangeDutyCycle(snelheid)
             lager_state = GPIO.input(31)
+            time.sleep(0.01)
             print(lager_state)
             if (lager_state == True):
                 time.sleep(0.1)
@@ -46,6 +48,7 @@ try:
                 snelheid -= 1
                 motor.ChangeDutyCycle(snelheid)
             card_state = GPIO.input(37)
+            time.sleep(0.01)
             print(card_state)
             if (card_state == True):
                 time.sleep(0.1)
