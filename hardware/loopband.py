@@ -39,7 +39,7 @@ try:
             if (lager_state == True):
                 print("omlaag")
             time.sleep(0.1)
-            card_state = GPIO.input(29)
+            card_state = GPIO.input(37)
             print(card_state)
             if (card_state == True):
                 print("card")
