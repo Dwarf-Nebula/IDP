@@ -1,6 +1,7 @@
 import sys
 import RPi.GPIO as GPIO
 import requests
+import time
 
 from ledring import *
 from readrfid import *
@@ -23,7 +24,7 @@ try:
         openin(ring_big)
         #GPIO.output(33, GPIO.HIGH)
         motor.ChangeDutyCycle(10)
-        wait(5)
+        time.sleep(5)
         """while True:
             card2 = readCard(continues=False)
             if (card2 == card):
