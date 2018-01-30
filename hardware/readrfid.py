@@ -5,7 +5,7 @@ import signal
 # Create an object of the class MFRC522
 MIFAREReader = MFRC522.MFRC522()
 
-def readCard():
+def readCard(continues=True):
     # Set reading True so the reader will read
     reading = True
     
@@ -36,8 +36,10 @@ def readCard():
                 reading = False
             else:
                 reading = False
-            
+        if continues == False:
+            status = ""
+            break
     if (status == MIFAREReader.MI_OK):
         return("{}{}{}{}".format(uid[0], uid[1], uid[2], uid[3]))
     else:
-        return(False)
+        return
