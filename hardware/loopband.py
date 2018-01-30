@@ -1,3 +1,5 @@
+from display import *
+
 import sys
 import RPi.GPIO as GPIO
 import requests
@@ -5,7 +7,7 @@ import time
 
 from ledring import *
 from readrfid import *
-from display import *
+
 
 bezig = 0
 snelheid = 0
