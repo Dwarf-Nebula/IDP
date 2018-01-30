@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf8 -*-
-
 import RPi.GPIO as GPIO
 import MFRC522
 import signal
