@@ -29,7 +29,7 @@ try:
         motor.ChangeDutyCycle(25)
         #time.sleep(5)
         while True:
-            hoger_state = GPIO.input(29)
+            """hoger_state = GPIO.input(29)
             print(hoger_state)
             if (hoger_state == False):
                 print("omhoog")
@@ -40,7 +40,7 @@ try:
                 print("omlaag")
                 time.sleep(0.1)
             card_state = GPIO.input(29)
-            print(card_state)
+            print(card_state)"""
             if (card_state == False):
                 print("card")
                 time.sleep(0.1)
