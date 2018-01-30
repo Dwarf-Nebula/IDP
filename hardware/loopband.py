@@ -10,9 +10,9 @@ bezig = 0
 url = "http://benno.using.ovh/request.php"
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(29, GPIO.IN, pull_up_down=GPIO.PUD_UP) # set pin 29 as an input, with pullup resistor
-GPIO.setup(31, GPIO.IN, pull_up_down=GPIO.PUD_UP) # set pin 31 as an input, with pullup resistor
-GPIO.setup(37, GPIO.IN, pull_up_down=GPIO.PUD_UP) # set pin 31 as an input, with pullup resistor
+GPIO.setup(29, GPIO.IN) # set pin 29 as an input
+GPIO.setup(31, GPIO.IN) # set pin 31 as an input
+GPIO.setup(37, GPIO.IN) # set pin 37 as an input
 GPIO.setup(33, GPIO.OUT)    # set GPIO 33 as output for the PWM signal
 motor = GPIO.PWM(33, 500)    # create object motor for PWM on port 33 at 1KHz
 motor.start(0) # start the pwm, but off
