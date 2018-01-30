@@ -10,8 +10,8 @@ url = "http://benno.using.ovh/request.php"
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(33, GPIO.OUT)    # set GPIO 33 as output for the PWM signal
-#motor = GPIO.PWM(33, 1000)    # create object motor for PWM on port 33 at 1KHz
-#motor.start(0) #start the pwm, but off
+motor = GPIO.PWM(33, 1000)    # create object motor for PWM on port 33 at 1KHz
+motor.start(0) #start the pwm, but off
 
 try:
     while True:
@@ -21,13 +21,13 @@ try:
         r = requests.post(url, data=payload)
         print(r.text)"""
         openin(ring_big)
-        GPIO.output(33, GPIO.HIGH)
-        #motor.ChangeDutyCycle(60)
+        #GPIO.output(33, GPIO.HIGH)
+        motor.ChangeDutyCycle(60)
         card2 = readCard()
         while (card2 != card):
             card2 = readCard()
-        GPIO.output(33, GPIO.LOW)
-        #motor.ChangeDutyCycle(0)
+        #GPIO.output(33, GPIO.LOW)
+        motor.ChangeDutyCycle(0)
         openuit(ring_big)
         
 except KeyboardInterrupt:
