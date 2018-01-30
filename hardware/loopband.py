@@ -34,19 +34,23 @@ try:
             hoger_state = GPIO.input(29)
             time.sleep(0.01)
             print(hoger_state)
-            if (hoger_state == True):
+            if (hoger_state == True and snelheid < 100):
                 time.sleep(0.1)
                 print("omhoog")
+                print(snelheid)
                 snelheid += 1
                 motor.ChangeDutyCycle(snelheid)
+            
             lager_state = GPIO.input(31)
             time.sleep(0.01)
             print(lager_state)
-            if (lager_state == True):
+            if (lager_state == True and snelheid > 0):
                 time.sleep(0.1)
                 print("omlaag")
+                print(snelheid)
                 snelheid -= 1
                 motor.ChangeDutyCycle(snelheid)
+            
             card_state = GPIO.input(37)
             time.sleep(0.01)
             print(card_state)
