@@ -30,14 +30,17 @@ try:
         #time.sleep(5)
         while True:
             button_state = GPIO.input(29)
+            print(button_state)
             if (button_state == False):
                 print("omhoog")
                 time.sleep(0.1)
             button_state = GPIO.input(31)
+            print(button_state)
             if (button_state == False):
                 print("omlaag")
                 time.sleep(0.1)
             button_state = GPIO.input(29)
+            print(button_state)
             if (button_state == False):
                 print("omhoog")
                 time.sleep(0.1)
