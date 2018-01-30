@@ -42,7 +42,7 @@ try:
             card_state = GPIO.input(29)
             print(card_state)
             if (card_state == False):
-                print("omhoog")
+                print(card)
                 time.sleep(0.1)
                 card2 = readCard()
                 if (card2 == card):
