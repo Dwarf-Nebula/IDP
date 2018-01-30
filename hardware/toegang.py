@@ -1,4 +1,5 @@
 import sys
+import RPi.GPIO as GPIO
 
 from ledring import *
 from readrfid import *
@@ -22,4 +23,5 @@ try:
         
 except KeyboardInterrupt:
     print("bye bye")
+    GPIO.cleanup()
     sys.exit()
