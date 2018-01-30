@@ -5,7 +5,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-disp = Adafruit_SSD1306.SSD1306_128_64
+disp = Adafruit_SSD1306.SSD1306_128_64(rst=24)
 
 disp.begin()
 disp.clear()
