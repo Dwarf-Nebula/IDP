@@ -20,8 +20,9 @@ image = Image.new('1', (width, height))
 draw = ImageDraw.Draw(image)
 draw.rectangle((0,0,width-1,height-1), outline=1, fill=0)
 
-font = ImageFont.load_default()
-draw.text((16, 8),'RASPBERRYTIPS.NL',  font=font, fill=255)
+def drawspeed(snelheid):
+    font = ImageFont.load_default()
+    draw.text((16, 8), snelheid,  font=font, fill=255)
 
-disp.image(image)
-disp.display()
+    disp.image(image)
+    disp.display()

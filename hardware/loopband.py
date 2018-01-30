@@ -5,6 +5,7 @@ import time
 
 from ledring import *
 from readrfid import *
+from display import *
 
 bezig = 0
 snelheid = 0
@@ -29,6 +30,7 @@ try:
         #GPIO.output(33, GPIO.HIGH)
         snelheid = 25
         motor.ChangeDutyCycle(snelheid)
+        drawspeed(snelheid)
         #time.sleep(5)
         while True:
             hoger_state = GPIO.input(29)
@@ -40,6 +42,7 @@ try:
                 print(snelheid)
                 snelheid += 1
                 motor.ChangeDutyCycle(snelheid)
+                drawspeed(snelheid)
             
             lager_state = GPIO.input(31)
             time.sleep(0.01)
@@ -50,6 +53,7 @@ try:
                 print(snelheid)
                 snelheid -= 1
                 motor.ChangeDutyCycle(snelheid)
+                drawspeed(snelheid)
             
             card_state = GPIO.input(37)
             time.sleep(0.01)
@@ -68,6 +72,7 @@ try:
         #GPIO.output(33, GPIO.LOW)
         snelheid = 0
         motor.ChangeDutyCycle(snelheid)
+        drawspeed(snelheid)
         openuit(ring_big)
         
 except KeyboardInterrupt:
