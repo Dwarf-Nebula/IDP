@@ -13,6 +13,7 @@ try:
             
         elif(card == "213.192.127.203" and binnen == 1):
             openuit()
+            binnen = 0
             time.sleep(2)
         else:
             weiger()
