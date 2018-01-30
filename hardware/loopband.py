@@ -6,7 +6,7 @@ from ledring import *
 from readrfid import *
 
 bezig = 0
-url = "benno.using.ovh/request.php"
+url = "http://benno.using.ovh/request.php"
 
 try:
     while True:
