@@ -31,21 +31,23 @@ try:
         while True:
             hoger_state = GPIO.input(29)
             #print(hoger_state)
-            if (hoger_state == False):
+            if (hoger_state == True):
                 print("omhoog")
                 time.sleep(0.1)
             lager_state = GPIO.input(31)
             #print(lager_state)
-            if (lager_state == False):
+            if (lager_state == True):
                 print("omlaag")
                 time.sleep(0.1)
             card_state = GPIO.input(29)
             #print(card_state)
-            if (card_state == False):
+            if (card_state == True):
                 print("card")
                 time.sleep(0.1)
                 card2 = readCard()
                 if (card2 == card):
+                    payload = {"action":"activitystop", "customerid":uid, "equipmentid":1}
+                    r = requests.post(url, data=payload)
                     break
                 else:
                     continue
