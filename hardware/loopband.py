@@ -1,6 +1,6 @@
 import sys
 import RPi.GPIO as GPIO
-import request
+import requests
 
 from ledring import *
 from readrfid import *
