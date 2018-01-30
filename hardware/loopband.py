@@ -7,6 +7,7 @@ from ledring import *
 from readrfid import *
 
 bezig = 0
+snelheid = 0
 url = "http://benno.using.ovh/request.php"
 
 GPIO.setmode(GPIO.BOARD)
@@ -26,33 +27,40 @@ try:
         print(r.text)"""
         openin(ring_big)
         #GPIO.output(33, GPIO.HIGH)
-        motor.ChangeDutyCycle(25)
+        snelheid = 25
+        motor.ChangeDutyCycle(snelheid)
         #time.sleep(5)
         while True:
             hoger_state = GPIO.input(29)
             print(hoger_state)
             if (hoger_state == True):
+                time.sleep(0.1)
                 print("omhoog")
-            time.sleep(0.1)
+                snelheid += 1
+                motor.ChangeDutyCycle(snelheid)
             lager_state = GPIO.input(31)
             print(lager_state)
             if (lager_state == True):
+                time.sleep(0.1)
                 print("omlaag")
-            time.sleep(0.1)
+                snelheid -= 1
+                motor.ChangeDutyCycle(snelheid)
             card_state = GPIO.input(37)
             print(card_state)
             if (card_state == True):
+                time.sleep(0.1)
                 print("card")
                 card2 = readCard()
-                """if (card2 == card):
-                    payload = {"action":"activitystop", "customerid":uid, "equipmentid":1}
-                    r = requests.post(url, data=payload)
+                if (card2 == card):
+                    """payload = {"action":"activitystop", "customerid":uid, "equipmentid":1}
+                    r = requests.post(url, data=payload)"""
                     break
                 else:
-                    continue"""
-            time.sleep(0.1)
+                    continue
+            
         #GPIO.output(33, GPIO.LOW)
-        motor.ChangeDutyCycle(0)
+        snelheid = 0
+        motor.ChangeDutyCycle(snelheid)
         openuit(ring_big)
         
 except KeyboardInterrupt:
