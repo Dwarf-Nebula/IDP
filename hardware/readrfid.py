@@ -38,6 +38,6 @@ def readCard():
                 reading = False
             
     if (status == MIFAREReader.MI_OK):
-        return("{}.{}.{}.{}".format(uid[0], uid[1], uid[2], uid[3]))
+        return("{}{}{}{}".format(uid[0], uid[1], uid[2], uid[3]))
     else:
         return(False)
