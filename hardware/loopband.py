@@ -22,7 +22,7 @@ try:
         print(r.text)"""
         openin(ring_big)
         #GPIO.output(33, GPIO.HIGH)
-        motor.ChangeDutyCycle(60)
+        motor.ChangeDutyCycle(20)
         card2 = readCard()
         while (card2 != card):
             card2 = readCard()
