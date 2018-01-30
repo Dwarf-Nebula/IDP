@@ -23,6 +23,7 @@ try:
         openin(ring_big)
         #GPIO.output(33, GPIO.HIGH)
         motor.ChangeDutyCycle(10)
+        wait(5)
         """while True:
             card2 = readCard(continues=False)
             if (card2 == card):
