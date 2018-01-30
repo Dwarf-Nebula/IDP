@@ -8,9 +8,9 @@ from readrfid import *
 bezig = 0
 url = "http://benno.using.ovh/request.php"
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(13, GPIO.OUT)    # set GPIO 25 as output for the PWM signal
-motor = GPIO.PWM(13, 1000)    # create object D2A for PWM on port 25 at 1KHz
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(33, GPIO.OUT)    # set GPIO 25 as output for the PWM signal
+motor = GPIO.PWM(33, 1000)    # create object D2A for PWM on port 25 at 1KHz
 motor.start(0) #start the pwm, but off
 
 try:
