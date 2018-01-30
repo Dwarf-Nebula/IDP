@@ -20,37 +20,37 @@ motor.start(0) # start the pwm, but off
 try:
     while True:
         card = readCard() #Check for a card
-        uid = int(card)
+        """uid = int(card)
         payload = {"action":"activitystart", "customerid":uid, "equipmentid":1}
         r = requests.post(url, data=payload)
-        print(r.text)
+        print(r.text)"""
         openin(ring_big)
         #GPIO.output(33, GPIO.HIGH)
         motor.ChangeDutyCycle(25)
         #time.sleep(5)
         while True:
             hoger_state = GPIO.input(29)
-            #print(hoger_state)
+            print(hoger_state)
             if (hoger_state == True):
                 print("omhoog")
-                time.sleep(0.1)
+            time.sleep(0.1)
             lager_state = GPIO.input(31)
-            #print(lager_state)
+            print(lager_state)
             if (lager_state == True):
                 print("omlaag")
-                time.sleep(0.1)
+            time.sleep(0.1)
             card_state = GPIO.input(29)
-            #print(card_state)
+            print(card_state)
             if (card_state == True):
                 print("card")
-                time.sleep(0.1)
                 card2 = readCard()
-                if (card2 == card):
+                """if (card2 == card):
                     payload = {"action":"activitystop", "customerid":uid, "equipmentid":1}
                     r = requests.post(url, data=payload)
                     break
                 else:
-                    continue
+                    continue"""
+            time.sleep(0.1)
         #GPIO.output(33, GPIO.LOW)
         motor.ChangeDutyCycle(0)
         openuit(ring_big)
