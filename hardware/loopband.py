@@ -9,8 +9,8 @@ bezig = 0
 url = "http://benno.using.ovh/request.php"
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(33, GPIO.OUT)    # set GPIO 25 as output for the PWM signal
-motor = GPIO.PWM(33, 1000)    # create object D2A for PWM on port 25 at 1KHz
+GPIO.setup(33, GPIO.OUT)    # set GPIO 33 as output for the PWM signal
+motor = GPIO.PWM(33, 1000)    # create object motor for PWM on port 33 at 1KHz
 motor.start(0) #start the pwm, but off
 
 try:
@@ -21,7 +21,7 @@ try:
         r = requests.post(url, data=payload)
         print(r.text)"""
         openin(ring_big)
-        motor.ChangeDutyCycle(20)
+        motor.ChangeDutyCycle(60)
         card2 = readCard()
         while (card2 != card):
             card2 = readCard()
