@@ -20,10 +20,10 @@ motor.start(0) # start the pwm, but off
 try:
     while True:
         card = readCard() #Check for a card
-        """uid = int(card)
+        uid = int(card)
         payload = {"action":"activitystart", "customerid":uid, "equipmentid":1}
         r = requests.post(url, data=payload)
-        print(r.text)"""
+        print(r.text)
         openin(ring_big)
         #GPIO.output(33, GPIO.HIGH)
         motor.ChangeDutyCycle(25)
