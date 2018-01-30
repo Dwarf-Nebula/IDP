@@ -2,7 +2,7 @@ import sys
 
 from ledring import *
 from readrfid import *
-
+binnen = 0
 try:
     while True:
         card = readCard()

@@ -41,8 +41,9 @@ def weiger(strip=ring, wait_ms=100):
         strip.setPixelColor(x, Color(255, 0, 0))
         strip.setPixelColor(x+12, Color(255, 0, 0))
         strip.show()
+        wait(wait_ms)
         
-def read(strip=ring, wait_ms=100):
+def read(strip=ring):
     for x in range(24):
-        strip.setPixelColor(x, Color(255, 0, 0))
+        strip.setPixelColor(x, Color(255, 255, 0))
     strip.show()
