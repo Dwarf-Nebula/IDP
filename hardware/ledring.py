@@ -72,3 +72,8 @@ def read(strip):
     for x in range(24):
         strip.setPixelColor(x, Color(255, 255, 0))
     strip.show()
+
+def clean(strip):
+    for x in range(24):
+        strip.setPixelColor(x, 0)
+    strip.show()
