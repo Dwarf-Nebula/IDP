@@ -22,21 +22,21 @@ def wait(ms):
     return
 
 # Define functions which animate LEDs in various ways.
-def openin(strip=ring, wait_ms=100):
+def openin(strip=ring, wait_ms=50):
     for x in range(12):
         strip.setPixelColor(x, Color(0, 255, 0))
         strip.setPixelColor(x+12, Color(255, 0, 0))
         strip.show()
         wait(wait_ms)
         
-def openuit(strip=ring, wait_ms=100):
+def openuit(strip=ring, wait_ms=50):
     for x in range(12):
         strip.setPixelColor(x+12, Color(0, 255, 0))
         strip.setPixelColor(x, Color(255, 0, 0))
         strip.show()
         wait(wait_ms)
 
-def weiger(strip=ring, wait_ms=100):
+def weiger(strip=ring, wait_ms=50):
     for x in range(12):
         strip.setPixelColor(x, Color(255, 0, 0))
         strip.setPixelColor(x+12, Color(255, 0, 0))
