@@ -31,17 +31,17 @@ try:
         while True:
             hoger_state = GPIO.input(29)
             print(hoger_state)
-            if (button_state == False):
+            if (hoger_state == False):
                 print("omhoog")
                 time.sleep(0.1)
             lager_state = GPIO.input(31)
             print(lager_state)
-            if (button_state == False):
+            if (lager_state == False):
                 print("omlaag")
                 time.sleep(0.1)
             card_state = GPIO.input(29)
             print(card_state)
-            if (button_state == False):
+            if (card_state == False):
                 print("omhoog")
                 time.sleep(0.1)
                 card2 = readCard()
