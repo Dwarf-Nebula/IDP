@@ -1,6 +1,8 @@
 import RPi.GPIO as GPIO
 
 out = GPIO.OUT
+HIGH = 1
+LOW = 0
 
 bin1 = 11
 bin2 = 13
