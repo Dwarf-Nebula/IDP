@@ -14,5 +14,6 @@ font = ImageFont.load_default()
 while True:
     for i in range(10):
         draw.text((16, 8), "i",  font=font, fill=255)
+    break
 disp.image(image)
 disp.display()
