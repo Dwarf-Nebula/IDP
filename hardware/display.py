@@ -1,26 +1,35 @@
-"""import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 out = GPIO.OUT
 
-GPIO.setup(29, out) # set pin 29 as an input
-GPIO.setup(31, out) # set pin 31 as an input
-GPIO.setup(37, out) # set pin 37 as an input
-GPIO.setup(33, out) # set GPIO 33 as output for the PWM signal"""
+bin1 = 11
+bin2 = 13
+bin4 = 15
+bin8 = 16
 
-import Adafruit_GPIO.SPI as SPI
-import Adafruit_SSD1306
-from PIL import Image
-from PIL import ImageDraw
-from PIL import ImageFont
-disp = Adafruit_SSD1306.SSD1306_128_64(rst=24)
-disp.begin()
-disp.clear()
-disp.display()
-image = Image.new('1', (disp.width, disp.height))
-draw = ImageDraw.Draw(image)
-draw.rectangle((0,0,disp.width-1,disp.height-1), outline=1, fill=0)
-font = ImageFont.load_default()
-disp.image(image)
+GPIO.setup(bin1, out) # set pin 29 as an input
+GPIO.setup(bin2, out) # set pin 31 as an input
+GPIO.setup(bin4, out) # set pin 37 as an input
+GPIO.setup(bin8, out) # set pin 33 as an output
+
 def drawspeed(speed):
-    draw.text((16, 8), str(speed),  font=font, fill=255)
-    disp.display()
+    if(speed >= 8):
+        GPIO.output(bin8, HIGH)
+        speed -= 8
+    else:
+        GPIO.output(bin8, LOW)
+    if(speed >= 4):
+        GPIO.output(bin4, HIGH)
+        speed -=4
+    else:
+        GPIO.output(bin4, LOW)
+    if(speed >= 2):
+        GPIO.output(bin2, HIGH)
+        speed -= 2
+    else:
+        GPIO.output(bin2, LOW)
+    if(speed >= 1):
+        GPIO.output(bin1, HIGH)
+    else:
+        GPIO.output(bin1, LOW)
+    return
