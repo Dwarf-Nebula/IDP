@@ -1,5 +1,8 @@
 <?php
 include 'functions.php';
+if (isset($_GET['request'])){
+    $currentCustomer->sendAdviceEmailRequest();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -115,6 +118,17 @@ include 'functions.php';
                 <div class="chart-container" >
                     <canvas id="equipmentuse"></canvas>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-26 col-md-4 col-sm-12">
+                <?php
+                    if (isset($_GET['request'])){
+                        echo '<div class="alert alert-success" role="alert">Uw aanvraag is verzonden!</div>';
+                    }
+                ?>
+                Als je op de volgende knop drukt wordt er een email verzonden naar een van onze medewerkers die u sport advies kan geven.
+                <a href="index.php?request=true" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Sport advies aanvragen</a>
             </div>
         </div>
 

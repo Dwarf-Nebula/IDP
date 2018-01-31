@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 $db = new MySQL();
-$db->connect('127.0.0.1','root','', 'benno', '3306');
+$db->connect('127.0.0.1','benno','benno123', 'benno', '3306');
 
 if (!empty($_POST)){ // check if post is set and not empty
     if (!empty($_POST['action'])){ // check if action is set and not empty
@@ -10,13 +10,6 @@ if (!empty($_POST)){ // check if post is set and not empty
             case 'checkin':
                 if (!empty($_POST['customerid']) && !empty($_POST['locationid'])){
                     echo checkincustomer($db, $_POST['customerid'], $_POST['locationid']);
-                }else{
-                    echo 'missing data';
-                }
-                break;
-            case 'checkout':
-                if (!empty($_POST['customerid']) && !empty($_POST['locationid'])){
-                    echo checkoutcustomer($db, $_POST['customerid'], $_POST['locationid']);
                 }else{
                     echo 'missing data';
                 }
@@ -44,25 +37,34 @@ if (!empty($_POST)){ // check if post is set and not empty
     }
 }
 function checkincustomer($db, $customerid, $locationid){
-    $time = gettime();
-    $query = $db->query('INSERT INTO `aanmeldingen`( `filiaalnummer`, `klantnummer`, `begintijd`) VALUES ('.$locationid.','.$customerid.',"'.$time.'")');
+    $query = $db->query('SELECT * FROM `klanten` WHERE `klantnummer` = '.$customerid.' AND `actief` = 1');
     $numrows = $query->rows();
     if ($numrows > 0){
-        $result = 'succes';
+        $time = gettime();
+        $query = $db->query('SELECT * FROM `aanmeldingen` WHERE `filiaalnummer`= '.$locationid.' AND `klantnummer` = '.$customerid.' AND `eindtijd` IS NULL');
+        $numrows = $query->rows();
+        if ($numrows > 0){
+            $query = $db->query('UPDATE `aanmeldingen` SET `eindtijd`="'.$time.'" WHERE `klantnummer` = '.$customerid.' AND `filiaalnummer` = '.$locationid.' AND `eindtijd` IS NULL');
+            $numrows = $query->rows();
+            if ($numrows > 0){
+                $result = 'out';
+            }else{
+                $result = 'failure';
+            }
+        }else{
+            $query = $db->query('INSERT INTO `aanmeldingen`( `filiaalnummer`, `klantnummer`, `begintijd`) VALUES ('.$locationid.','.$customerid.',"'.$time.'")');
+            $numrows = $query->rows();
+            if ($numrows > 0){
+                $result = 'in';
+            }else{
+                $result = 'failure';
+            }
+        }
     }else{
-        $result = 'failure';
+        $result = 'no customer';
     }
-    return $result;
-}
-function checkoutcustomer($db, $customerid, $locationid){
-    $time = gettime();
-    $query = $db->query();
-    $numrows = $query->rows();
-    if ($numrows > 0){
-        $result = 'succes';
-    }else{
-        $result = 'failure';
-    }
+
+
     return $result;
 }
 function activitystart($db, $customerid, $equipmentid){
@@ -89,5 +91,5 @@ function activitystop($db, $customerid, $equipmentid){
 }
 
 function gettime(){
-        return date('Y-m-d H:i:s'); // return current time in the database format
+    return date('Y-m-d H:i:s'); // return current time in the database format
 }
