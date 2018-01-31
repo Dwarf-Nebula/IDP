@@ -6,7 +6,7 @@ import time
 
 from ledring import *
 from readrfid import *
-#from display import *
+from display import *
 
 bezig = 0
 snelheid = 0
