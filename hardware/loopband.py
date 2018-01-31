@@ -12,8 +12,8 @@ bezig = 0
 snelheid = 0
 url = "http://benno.using.ovh/request.php"
 
-gpio = get_platform_gpio(mode=RPi.GPIO.BOARD)
-GPIO.setmode(GPIO.BOARD)
+GPIO = get_platform_gpio(mode=RPi.GPIO.BOARD)
+#GPIO.setmode(GPIO.BOARD)
 GPIO.setup(29, GPIO.IN) # set pin 29 as an input
 GPIO.setup(31, GPIO.IN) # set pin 31 as an input
 GPIO.setup(37, GPIO.IN) # set pin 37 as an input
