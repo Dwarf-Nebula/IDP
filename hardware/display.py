@@ -21,7 +21,7 @@ def drawspeed(speed):
         GPIO.output(bin2, LOW)
         GPIO.output(bin1, LOW)
         return
-    elif:
+    else:
         speed -= 14
         if(speed >= 8):
             GPIO.output(bin8, HIGH)
