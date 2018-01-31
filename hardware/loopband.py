@@ -1,6 +1,6 @@
 import sys
 import RPi.GPIO
-import Adafruit_GPIO as GPIO
+from Adafruit_GPIO import *
 import requests
 import time
 
