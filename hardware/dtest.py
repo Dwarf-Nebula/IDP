@@ -13,6 +13,6 @@ draw.rectangle((0,0,disp.width-1,disp.height-1), outline=1, fill=0)
 font = ImageFont.load_default()
 while True:
     for i in range(10):
-        draw.text((16, 8), i,  font=font, fill=255)
+        draw.text((16, 8), "i",  font=font, fill=255)
 disp.image(image)
 disp.display()
