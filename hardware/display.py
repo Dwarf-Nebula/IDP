@@ -26,3 +26,9 @@ def drawspeed(snelheid):
 
     disp.image(image)
     disp.display()
+
+while True:
+    for i in range(30):
+        drawspeed(i)
+    for i in range(0, 30, -1):
+        drawspeed(i)
