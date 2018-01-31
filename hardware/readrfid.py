@@ -31,12 +31,11 @@ def readCard():
 
             # Check if authenticated
             if (status == MIFAREReader.MI_OK):
-                MIFAREReader.MFRC522_Read(8)
+                customeridarray = MIFAREReader.MFRC522_Read(8)
+                customerid = int.from_bytes(bytes(customeridarray[0:4]), byteorder='big')
+                print(customerid)
                 MIFAREReader.MFRC522_StopCrypto1()
                 reading = False
+                return customerid
             else:
                 reading = False
-    if (status == MIFAREReader.MI_OK):
-        return("{}{}{}{}".format(uid[0], uid[1], uid[2], uid[3]))
-    else:
-        return

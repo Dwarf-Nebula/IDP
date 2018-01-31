@@ -1,35 +1,8 @@
-import Adafruit_GPIO.SPI as SPI
-import Adafruit_SSD1306
+import RPi.GPIO as GPIO
 
-from PIL import Image
-from PIL import ImageDraw
-from PIL import ImageFont
+out = GPIO.OUT
 
-disp = Adafruit_SSD1306.SSD1306_128_64(rst=24)
-
-disp.begin()
-disp.clear()
-disp.display()
-
-# Get display width and height.
-width = disp.width
-height = disp.height
-
-image = Image.new('1', (width, height))
-
-draw = ImageDraw.Draw(image)
-draw.rectangle((0,0,width-1,height-1), outline=1, fill=0)
-
-font = ImageFont.load_default()
-
-def drawspeed(snelheid):
-    draw.text((16, 8), snelheid,  font=font, fill=255)
-
-    disp.image(image)
-    disp.display()
-
-while True:
-    for i in range(30):
-        drawspeed(i)
-    for i in range(0, 30, -1):
-        drawspeed(i)
+GPIO.setup(29, out) # set pin 29 as an input
+GPIO.setup(31, out) # set pin 31 as an input
+GPIO.setup(37, out) # set pin 37 as an input
+GPIO.setup(33, out) # set GPIO 33 as output for the PWM signal
