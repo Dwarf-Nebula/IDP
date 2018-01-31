@@ -32,7 +32,7 @@ try:
         
         snelheid = 25
         motor.ChangeDutyCycle(snelheid)
-        #drawspeed(snelheid)
+        drawspeed(snelheid)
         
         while True:
             hoger_state = GPIO.input(29)
@@ -44,7 +44,7 @@ try:
                 print(snelheid)
                 snelheid += 1
                 motor.ChangeDutyCycle(snelheid)
-                #drawspeed(snelheid)
+                drawspeed(snelheid)
             
             lager_state = GPIO.input(31)
             time.sleep(0.01)
@@ -55,7 +55,7 @@ try:
                 print(snelheid)
                 snelheid -= 1
                 motor.ChangeDutyCycle(snelheid)
-                #drawspeed(snelheid)
+                drawspeed(snelheid)
             
             card_state = GPIO.input(37)
             time.sleep(0.01)
@@ -73,7 +73,7 @@ try:
         
         snelheid = 0
         motor.ChangeDutyCycle(snelheid)
-        #drawspeed(snelheid)
+        drawspeed(snelheid)
         openuit(ring_big)
         
 except KeyboardInterrupt:
