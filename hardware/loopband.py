@@ -36,22 +36,22 @@ try:
             hoger_state = GPIO.input(29)
             time.sleep(0.01)
             
-            if (hoger_state == True and snelheid < 100):
+            if (hoger_state == True and snelheid < 30):
                 time.sleep(0.1)
+                snelheid += 1
                 print("omhoog")
                 print(snelheid)
-                snelheid += 1
                 motor.ChangeDutyCycle(snelheid)
                 drawspeed(snelheid)
             
             lager_state = GPIO.input(31)
             time.sleep(0.01)
             
-            if (lager_state == True and snelheid > 0):
+            if (lager_state == True and snelheid > 15):
                 time.sleep(0.1)
+                snelheid -= 1
                 print("omlaag")
                 print(snelheid)
-                snelheid -= 1
                 motor.ChangeDutyCycle(snelheid)
                 drawspeed(snelheid)
             
