@@ -4,10 +4,10 @@ out = GPIO.OUT
 HIGH = 1
 LOW = 0
 
-bin1 = 11
-bin2 = 13
-bin4 = 15
-bin8 = 16
+bin1 = 16
+bin2 = 15
+bin4 = 13
+bin8 = 11
 
 GPIO.setup(bin1, out) # set pin 29 as an input
 GPIO.setup(bin2, out) # set pin 31 as an input

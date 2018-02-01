@@ -33,7 +33,7 @@ try:
         drawspeed(snelheid)
         
         while True:
-            hoger_state = GPIO.input(29)
+            hoger_state = GPIO.input(31)
             time.sleep(0.01)
             
             if (hoger_state == True and snelheid < 30):
@@ -44,7 +44,7 @@ try:
                 motor.ChangeDutyCycle(snelheid)
                 drawspeed(snelheid)
             
-            lager_state = GPIO.input(31)
+            lager_state = GPIO.input(29)
             time.sleep(0.01)
             
             if (lager_state == True and snelheid > 15):
