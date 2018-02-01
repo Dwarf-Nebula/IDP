@@ -25,9 +25,14 @@ try:
         uid = int(card)
         payload = {"action":"activitystart", "customerid":uid, "equipmentid":1}
         r = requests.post(url, data=payload)
+        while(r.text == "missing data"):
+            openuit(ring_big)
+            card = readCard()
+            uid = int(card)
+            payload = {"action":"activitystart", "customerid":uid, "equipmentid":1}
+            r = requests.post(url, data=payload)
+            print(r.text)
         print(r.text)
-        openin(ring_big)
-        
         snelheid = 25
         motor.ChangeDutyCycle(snelheid)
         drawspeed(snelheid)
