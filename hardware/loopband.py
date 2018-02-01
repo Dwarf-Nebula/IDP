@@ -33,6 +33,7 @@ try:
             payload = {"action":"activitystart", "customerid":uid, "equipmentid":1}
             r = requests.post(url, data=payload)
             print(r.text)
+        openin(ring_big)
         print(r.text)
         snelheid = 25
         motor.ChangeDutyCycle(snelheid)
