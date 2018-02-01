@@ -80,7 +80,7 @@ function activitystart($db, $customerid, $equipmentid){
 }
 function activitystop($db, $customerid, $equipmentid){
     $time = gettime();
-    $query = $db->query('UPDATE `sportactiviteiten` SET `eindtijd`="'.$time.'" WHERE `klantnummer` = '.$customerid.' AND `apparaatid` = '.$equipmentid.' AND `eindtijd` = NULL ');
+    $query = $db->query('UPDATE `sportactiviteiten` SET `eindtijd`="'.$time.'" WHERE `klantnummer` = '.$customerid.' AND `apparaatid` = '.$equipmentid.' AND `eindtijd` IS NULL ');
     $numrows = $query->rows();
     if ($numrows > 0){
         $result = 'succes';
