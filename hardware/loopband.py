@@ -80,6 +80,7 @@ try:
         motor.ChangeDutyCycle(snelheid)
         drawspeed(snelheid)
         #openuit(ring_big)
+        time.sleep(3)
         
 except KeyboardInterrupt:
     print("bye bye")
