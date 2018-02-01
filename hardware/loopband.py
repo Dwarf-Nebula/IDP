@@ -21,6 +21,7 @@ motor.start(0) # start the pwm, but off
 
 try:
     while True:
+        read(ring_big)
         card = readCard() #Check for a card
         uid = int(card)
         payload = {"action":"activitystart", "customerid":uid, "equipmentid":1}
@@ -77,7 +78,7 @@ try:
         snelheid = 0
         motor.ChangeDutyCycle(snelheid)
         drawspeed(snelheid)
-        openuit(ring_big)
+        #openuit(ring_big)
         
 except KeyboardInterrupt:
     print("bye bye")
