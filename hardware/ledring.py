@@ -40,6 +40,8 @@ def openin(strip, wait_ms=50, color=Color(0, 255, 0)):
                 strip.setPixelColor(x, color)
             strip.show()
             wait(wait_ms)
+    else:
+        print("Error in")
 
 # Define functions which animate LEDs in various ways.
 def openuit(strip, wait_ms=50, color=Color(255, 0, 0)):
@@ -58,7 +60,9 @@ def openuit(strip, wait_ms=50, color=Color(255, 0, 0)):
                 strip.setPixelColor(x, color)
             strip.show()
             wait(wait_ms)
-
+    else:
+        print("Error uit")
+        
 def weiger(strip, wait_ms=50):
     for x in range(12):
         strip.setPixelColor(x, Color(255, 0, 0))
