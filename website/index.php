@@ -100,8 +100,8 @@ if (isset($_GET['request'])){
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        Welkom <?= $currentCustomer->getFirstname();?>
+        <small>Bekijk meteen uw activiteit van de laatste 7 dagen.</small>
       </h1>
     </section>
 
