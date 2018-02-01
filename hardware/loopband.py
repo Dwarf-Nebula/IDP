@@ -7,6 +7,7 @@ from ledring import *
 from readrfid import *
 from display import *
 
+apparaat = 1
 bezig = 0
 snelheid = 0
 url = "http://benno.using.ovh/request.php"
@@ -24,13 +25,13 @@ try:
         read(ring_big)
         card = readCard() #Check for a card
         uid = int(card)
-        payload = {"action":"activitystart", "customerid":uid, "equipmentid":1}
+        payload = {"action":"activitystart", "customerid":uid, "equipmentid":apparaat}
         r = requests.post(url, data=payload)
         while(r.text == "missing data"):
             openuit(ring_big)
             card = readCard()
             uid = int(card)
-            payload = {"action":"activitystart", "customerid":uid, "equipmentid":1}
+            payload = {"action":"activitystart", "customerid":uid, "equipmentid":apparaat}
             r = requests.post(url, data=payload)
             print(r.text)
         openin(ring_big)
@@ -45,22 +46,24 @@ try:
             
             if (hoger_state == True and snelheid < 30):
                 time.sleep(0.1)
-                snelheid += 1
+                """snelheid += 1
                 print("omhoog")
                 print(snelheid)
                 motor.ChangeDutyCycle(snelheid)
-                drawspeed(snelheid)
+                drawspeed(snelheid)"""
+                apparaat = 1
             
             lager_state = GPIO.input(29)
             time.sleep(0.01)
             
             if (lager_state == True and snelheid > 15):
                 time.sleep(0.1)
-                snelheid -= 1
+                """snelheid -= 1
                 print("omlaag")
                 print(snelheid)
                 motor.ChangeDutyCycle(snelheid)
-                drawspeed(snelheid)
+                drawspeed(snelheid)"""
+                apparaat = 3
             
             card_state = GPIO.input(37)
             time.sleep(0.01)
@@ -70,7 +73,7 @@ try:
                 print("card")
                 card2 = readCard()
                 if (card2 == card):
-                    payload = {"action":"activitystop", "customerid":uid, "equipmentid":1}
+                    payload = {"action":"activitystop", "customerid":uid, "equipmentid":apparaat}
                     r = requests.post(url, data=payload)
                     break
                 else:
