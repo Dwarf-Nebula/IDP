@@ -24,13 +24,13 @@ try:
         read(ring_big)
         card = readCard() #Check for a card
         uid = int(card)
-        payload = {"action":"activitystart", "customerid":uid, "equipmentid":apparaat}
+        payload = {"action":"activitystart", "customerid":uid, "equipmentid":1}
         r = requests.post(url, data=payload)
         while(r.text == "missing data"):
             openuit(ring_big)
             card = readCard()
             uid = int(card)
-            payload = {"action":"activitystart", "customerid":uid, "equipmentid":apparaat}
+            payload = {"action":"activitystart", "customerid":uid, "equipmentid":1}
             r = requests.post(url, data=payload)
             print(r.text)
         openin(ring_big)
@@ -70,7 +70,7 @@ try:
                 print("card")
                 card2 = readCard()
                 if (card2 == card):
-                    payload = {"action":"activitystop", "customerid":uid, "equipmentid":apparaat}
+                    payload = {"action":"activitystop", "customerid":uid, "equipmentid":1}
                     r = requests.post(url, data=payload)
                     break
                 else:
