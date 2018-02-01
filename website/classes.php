@@ -187,7 +187,7 @@ Class Customer
         //Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Sport advies aanvraag';
-        $mail->Body    = 'De klant '.$customerfullname. ' heeft sport advies aangevraagd.<br> De sport activiteiten kan je met <a href="benno.using.ovh/stats.php?id='.$this->getId().'">deze link</a> nakijken. <br> Gelieve zo snel mogelijk naar '.$this->getEmail().' . ';
+        $mail->Body    = 'De klant '.$customerfullname. ' heeft sport advies aangevraagd.<br> De sport activiteiten kan je met <a href="benno.using.ovh/stats.php?id='.$this->getId().'">deze link</a> nakijken. <br> Gelieve zo snel mogelijk naar '.$this->getEmail().' een email te sturen. ';
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();
