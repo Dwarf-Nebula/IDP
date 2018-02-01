@@ -7,7 +7,6 @@ from ledring import *
 from readrfid import *
 from display import *
 
-apparaat = 1
 bezig = 0
 snelheid = 0
 url = "http://benno.using.ovh/request.php"
@@ -46,24 +45,22 @@ try:
             
             if (hoger_state == True and snelheid < 30):
                 time.sleep(0.1)
-                """snelheid += 1
+                snelheid += 1
                 print("omhoog")
                 print(snelheid)
                 motor.ChangeDutyCycle(snelheid)
-                drawspeed(snelheid)"""
-                apparaat = 1
+                drawspeed(snelheid)
             
             lager_state = GPIO.input(29)
             time.sleep(0.01)
             
             if (lager_state == True and snelheid > 15):
                 time.sleep(0.1)
-                """snelheid -= 1
+                snelheid -= 1
                 print("omlaag")
                 print(snelheid)
                 motor.ChangeDutyCycle(snelheid)
-                drawspeed(snelheid)"""
-                apparaat = 3
+                drawspeed(snelheid)
             
             card_state = GPIO.input(37)
             time.sleep(0.01)
