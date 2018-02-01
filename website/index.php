@@ -169,7 +169,7 @@ if (isset($_GET['request'])){
     $.ajax({
         type: "POST",
         url: url,
-        data: {actionName: 'allchart', id : '<?= $currentCustomer->getId() ?>'},
+        data: {actionName: 'weekchart', id : '<?= $currentCustomer->getId() ?>'},
         success: function(result){
             var chartarray = JSON.parse(result);
             console.log(chartarray);
