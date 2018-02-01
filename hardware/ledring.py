@@ -2,7 +2,7 @@ import time
 from neopixel import *
 
 # LED configuration:
-LED_COUNT_SMALL = 24      # Number of LED pixels.
+LED_COUNT_SMALL = 12      # Number of LED pixels.
 LED_COUNT_BIG   = 22      # Number of LED pixels.
 LED_PIN         = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 LED_FREQ_HZ     = 800000  # LED signal frequency in hertz (usually 800khz)
@@ -28,7 +28,6 @@ def openin(strip, wait_ms=50, color=Color(0, 255, 0)):
     if(strip == ring_small):
         for x in range(12):
             strip.setPixelColor(x, color)
-            strip.setPixelColor(x+12, Color(255, 0, 0))
             strip.show()
             wait(wait_ms)
     elif(strip == ring_big):
@@ -46,8 +45,7 @@ def openin(strip, wait_ms=50, color=Color(0, 255, 0)):
 def openuit(strip, wait_ms=50, color=Color(255, 0, 0)):
     if(strip == ring_small):
         for x in range(12):
-            strip.setPixelColor(x, color)
-            strip.setPixelColor(x+12, Color(0, 255, 0))
+            strip.setPixelColor(x, Color(0, 255, 0))
             strip.show()
             wait(wait_ms)
     elif(strip == ring_big):
@@ -64,7 +62,6 @@ def openuit(strip, wait_ms=50, color=Color(255, 0, 0)):
 def weiger(strip, wait_ms=50):
     for x in range(12):
         strip.setPixelColor(x, Color(255, 0, 0))
-        strip.setPixelColor(x+12, Color(255, 0, 0))
         strip.show()
         wait(wait_ms)
         
